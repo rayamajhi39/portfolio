@@ -390,7 +390,9 @@
         <section class="contact__form-wrap" aria-label="Contact form">
           <p>Or use the form below to tell me a little about your project. I’d love to hear what you have in mind.</p>
           <p class="form__heading">Send a message</p>
-          <form class="form" id="contact-form" novalidate>
+          <form class="form" id="contact-form" action="https://formsubmit.co/arayafilmsnp@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New project inquiry | Araya Films" />
+            <input type="hidden" name="_template" value="table" />
 
             <!-- Name Row -->
             <div class="form__group">
@@ -446,10 +448,7 @@
             <!-- Submit -->
             <button class="form__submit" type="submit" id="contact-submit">Send</button>
 
-            <!-- Success message -->
-            <div class="form__success" role="alert" aria-live="polite">
-              ✓ &nbsp;Thanks! Your message has been sent. I'll be in touch soon.
-            </div>
+            <p>Messages are sent securely through FormSubmit. You may be asked to complete a spam check.</p>
 
           </form>
         </section>
@@ -473,7 +472,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=6"></script>
   <script src="js/effects.js?v=2"></script>
 </body>
 </html>

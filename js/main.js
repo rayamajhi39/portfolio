@@ -180,12 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Contact Form Validation ──────────────────────────────
   const contactForm = document.getElementById('contact-form');
-  const successMsg  = document.querySelector('.form__success');
 
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
       let valid = true;
       const inputs = contactForm.querySelectorAll('[required]');
 
@@ -207,11 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      if (valid && successMsg) {
-        contactForm.reset();
-        successMsg.classList.add('visible');
-        setTimeout(() => successMsg.classList.remove('visible'), 5000);
-      }
+      // Valid submissions POST to the email service, which handles confirmation.
+      if (!valid) e.preventDefault();
     });
 
     // Clear error on input
