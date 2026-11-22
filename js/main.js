@@ -182,7 +182,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.getElementById('contact-form');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    const submitButton = contactForm.querySelector('[type="submit"]');
+    const status = document.getElementById('contact-status');
+    let sending = false;
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (sending) return;
+      status.textContent = '';
       let valid = true;
       const inputs = contactForm.querySelectorAll('[required]');
 
@@ -204,8 +211,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Valid submissions POST to the email service, which handles confirmation.
-      if (!valid) e.preventDefault();
+      if (!valid) {
+        status.textContent = 'Please complete all fields and enter a valid email address.';
+        return;
+      }
+
+      const data = Object.fromEntries(new FormData(contactForm));
+      data.name = `${data.first_name.trim()} ${data.last_name.trim()}`;
+      sending = true;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+      contactForm.setAttribute('aria-busy', 'true');
+      status.textContent = 'Sending your message...';
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+          signal: AbortSignal.timeout(20000)
+        });
+        const result = await response.json();
+        if (!response.ok || result.success !== true) throw new Error('Submission failed');
+
+        contactForm.reset();
+        status.textContent = 'Thanks! Your message has been submitted. I will be in touch soon.';
+      } catch (error) {
+        status.textContent = 'We could not confirm your message was sent. Your message is still here. Please try again or email arayafilmsnp@gmail.com.';
+      } finally {
+        sending = false;
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send';
+        contactForm.removeAttribute('aria-busy');
+      }
     });
 
     // Clear error on input

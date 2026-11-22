@@ -176,9 +176,10 @@
       <section class="contact__form-wrap" aria-label="Contact form">
         <p>Or use the form below to tell me a little about your project. I’d love to hear what you have in mind.</p>
         <p class="form__heading">Send a message</p>
-        <form class="form" id="contact-form" action="https://formsubmit.co/arayafilmsnp@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New project inquiry | Araya Films" />
-          <input type="hidden" name="_template" value="table" />
+        <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="567d5df0-48c0-4290-9808-74d4ab6de4bf" />
+          <input type="hidden" name="subject" value="New project inquiry | Araya Films" />
+          <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off" />
 
           <!-- Name Row -->
           <div class="form__group">
@@ -234,7 +235,7 @@
           <!-- Submit -->
           <button class="form__submit" type="submit" id="contact-submit">Send</button>
 
-          <p>Messages are sent securely through FormSubmit. You may be asked to complete a spam check.</p>
+          <p id="contact-status" role="status" aria-live="polite" aria-atomic="true"></p>
 
         </form>
       </section>
@@ -257,7 +258,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=6"></script>
+  <script src="js/main.js?v=7"></script>
   <script src="js/effects.js?v=2"></script>
 </body>
 </html>
