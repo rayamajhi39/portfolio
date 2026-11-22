@@ -65,6 +65,10 @@ for (const file of pages) {
   assert.equal(schema['@graph'].find(node => node['@type'] === 'WebPage').url, canonical);
   assert.ok(!schema['@graph'].some(node => node['@type'] === 'VideoObject'));
 
+  if (file === 'index.html' || file === 'about.html') {
+    assert.equal(schema['@graph'].find(node => node['@type'] === 'WebPage').mainEntity['@id'], person['@id']);
+  }
+
   // Check local linked files and fragments without making network requests.
   for (const match of html.matchAll(/<(?:a|img|script|link)\b[^>]*>/g)) {
     const tag = attributes(match[0]);
