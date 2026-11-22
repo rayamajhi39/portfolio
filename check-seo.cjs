@@ -59,7 +59,7 @@ for (const file of pages) {
   }
   const person = schema['@graph'].find(node => node['@type'] === 'Person');
   assert.equal(person.name, 'Avishek Rayamajhi');
-  assert.deepEqual(person.alternateName, ['Araya Films', 'arayafilms']);
+  assert.deepEqual(person.alternateName, ['Araya Films', 'arayafilms', 'avishekrayamajhi']);
   assert.equal(person.address.addressLocality, 'Kathmandu');
   assert.equal(person.address.addressCountry, 'NP');
   assert.equal(schema['@graph'].find(node => node['@type'] === 'WebPage').url, canonical);
